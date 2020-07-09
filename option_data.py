@@ -34,20 +34,20 @@ def parse_option(ticker,stamp_list):
         for i in range(1,len(Price)):
             iV.append(iVol[i].get_text())
             strike.append(Strike[i].get_text())
-            if float(strike[i])<=float(strike[i-1]):####begin to record put opiton price
+            if float(strike[i].replace(',',''))<=float(strike[i-1].replace(',','')):####begin to record put opiton price
                 flag=1
             if flag==0:
                 callPrice.append(Price[i].get_text())
             else:
                 putPrice.append(Price[i].get_text())
 
-        ####split the strikes into call and put
-        callStrike= list(map(float,strike[:len(callPrice)]))
-        putStrike= list(map(float,strike[len(callPrice):]))
-
-        iv = [float(i[:-1]) for i in iV]
-        callIV=iv[:len(callPrice)]
-        putIV=iv[len(callPrice):]
+        ####split the strikes into call and put, remove any , in number string
+        callStrike= [float(x.replace(',','')) for x in strike[:len(callPrice)]]
+        putStrike=  [float(x.replace(',','')) for x in strike[len(callPrice):]]
+        callPrice = [float(x.replace(',','')) for x in callPrice]
+        putPrice =  [float(x.replace(',','')) for x in putPrice]
+        callIV= [float(x[:-1].replace(',','')) for x in iV[:len(callPrice)]]
+        putIV=[float(x[:-1].replace(',','')) for x in iV[len(callPrice):]]
 
         maturity = str(datetime.fromtimestamp(int(timestamp)).date())
         call[maturity] = pd.DataFrame([callPrice,callIV],columns=callStrike,index=['price','iv']).T.astype(float)

@@ -32,5 +32,5 @@ def main(ticker,plot_type):
 
 if __name__=="__main__":
 
-    main(ticker='AAPL',plot_type='2D')
+    main(ticker='AMZN',plot_type='2D')
 
