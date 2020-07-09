@@ -7,18 +7,18 @@ Derive implied volatility curves or surface for a specific ticker (e.g. AAPL)
 
 Apple monthlies call option implied volatility surface:
 
-![](example\aaplc.png)
+![](example/aaplc.png)
 
 Apple monthlies put option implied volatility surface:
 
-![](example\aaplp.png)
+![](example/aaplp.png)
 
 ## Implied volatility curve 
 
 AAPL call option skew
 
-![](example\aaplc1.png)
+![](example/aaplc1.png)
 
 AAPL put option skew
 
-![](example\aaplp1.png)
+![](example/aaplp1.png)
