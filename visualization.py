@@ -19,8 +19,14 @@ class Visual:
         """ Plot the implied volatility surface
         """
         #clean data
-        c_iv = c_iv.fillna(method='ffill').fillna(method='bfill')
-        p_iv = p_iv.fillna(method='ffill').fillna(method='bfill')
+        c_iv = c_iv.replace(0,np.nan)
+        p_iv = p_iv.replace(0,np.nan)
+
+        c_iv = c_iv.dropna()
+        p_iv = p_iv.dropna()
+
+        # c_iv = c_iv.fillna(method='ffill').fillna(method='bfill')
+        # p_iv = p_iv.fillna(method='ffill').fillna(method='bfill')
         # Initialize figure with 3D subplots
         
         fig = make_subplots(rows=1, cols=2,
@@ -28,21 +34,23 @@ class Visual:
 
         # adding surfaces to subplots.
         fig.add_trace(
-            go.Surface(x=c_iv.index, y=c_iv.columns, z=c_iv.values, colorscale='Viridis', showscale=False),
+            go.Surface(x=c_iv.index, y=c_iv.columns, z=c_iv.T.values, colorscale='Viridis', showscale=False),
             row=1, col=1)
 
         fig.add_trace(
-            go.Surface(x=p_iv.index, y=p_iv.columns, z=p_iv.values, colorscale='RdBu', showscale=False),
+            go.Surface(x=p_iv.index, y=p_iv.columns, z=p_iv.T.values, colorscale='RdBu', showscale=False),
             row=1, col=2)
 
         fig.update_layout(
             title_text=f'Implied volatility Surface for {self.ticker} at {self.today}',
-            height=600,width=1200)
+            height=800,width=1200)
 
         fig.show()
+        pass
 
     def plot_iv_curves(self,c_iv):
         #plot skew
+        c_iv = c_iv.replace(0,np.nan)
         c_iv = c_iv.dropna()
         
         fig = go.Figure()

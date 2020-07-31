@@ -60,7 +60,7 @@ def parse_option(ticker,stamp_list):
 def get_iv_df(call_dic,put_dic):
     """Get implied volatility of options from parsed result
     """
-    c_iv,p_iv = pd.DataFrame(),pd.DataFrame()
+    c_iv,p_iv = pd.DataFrame(), pd.DataFrame()
     for dt,call in call_dic.items():
         c_iv = pd.concat([c_iv,call.iv],sort=True,join = 'outer',axis=1)
 
@@ -69,6 +69,7 @@ def get_iv_df(call_dic,put_dic):
 
     c_iv.columns = call_dic.keys()
     p_iv.columns = put_dic.keys()
+
 
     return c_iv,p_iv
     
