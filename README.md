@@ -1,5 +1,6 @@
 # Implied-Volatility-Surface
-Derive implied volatility curves or surface for a specific ticker (e.g. AAPL) hello I am local
+Derive implied volatility curves or surface for a specific ticker (e.g. AAPL)
+I am a merge conflict
 
 # Demo
 
